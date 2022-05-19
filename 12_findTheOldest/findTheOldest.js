@@ -6,19 +6,21 @@ const findTheOldest = function(array) {
 
     oldestPerson = array.reduce((previous, current) => {
         let birthYear = current.yearOfBirth
-        let deathYear = current.yearOfDeath || null
+        let deathYear = current.yearOfDeath || undefined
         let currentYear = (new Date().getFullYear());
-        if (typeof deathYear === undefined) {
+        if (deathYear === undefined) {
             age = currentYear - birthYear;
             oldest = current
-        }
-        if ((deathYear - birthYear) > age) {
-            age = (deathYear || currentYear) - birthYear;
+        } else if((deathYear - birthYear) > age){
+            age = deathYear - birthYear
             oldest = current
         }
 
+    
+
     return previous;
     }, 0)
+    console.log(oldest)
     return oldest
 };
 
