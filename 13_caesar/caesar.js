@@ -1,30 +1,34 @@
+const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+const lower = 'abcdefghijklmnopqrstuvwxyz'
+
+
+
+
 const caesar = function(word, number) {
- /**take the given word turn each character it into its charcode and + the given amount of increase for each letter 
-  * 
-  * MAKE IT LOOP AROUND THE APLHABET\
- */
- let wordCode = [];
- let encryptedCode = [];
- let encryptedWord = [];
- let newWord = [];
- let ignore;
- const regex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
+
+    let text = '';
+
     for(i = 0; i < word.length; i++){
-        if( word.charAt(i) === "!" || word.charAt(i) === " " || word.charAt(i) === "," || word.charAt(i) === "?"  ){
-            wordCode = word.charCodeAt(i)
-            encryptedCode.push((String.fromCharCode(wordCode)))
-            newWord = encryptedCode.join("");}
-        else {
-        wordCode = word.charCodeAt(i) + number
-        encryptedCode.push((String.fromCharCode(wordCode)))
-        newWord = encryptedCode.join("");
-        console.log(newWord)
-        }
+    var letter = word[i];
+
+    if(upper.includes(letter)) {
+        // if it contains an uppercase charcter, add the number of shifts to it. If it exceeds MAX or MIN for UPPER then add or subtract from the beginning or the end.
+        let letterShift = ((upper.indexOf(letter) + number) % 26)
+        text += upper[letterShift]
+
+    }else if(lower.includes(letter)) {
+         // if it contains an lowercase charcter, add the number of shifts to it. If it exceeds MAX or MIN for LOWER add or subtract from the beginning or the end.
+        let letterShift = ((lower.indexOf(letter) + number) % 26)
+        text += lower[letterShift]
+         
+    }else {
+        // ignore all other characters.
+        text += letter
+        }  
+    
     }
-
-    console.table(newWord)
-    return newWord
+    console.log(text)
+    return(text) 
 };
-
 // Do not edit below this line
 module.exports = caesar;
